@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,7 +34,8 @@ jobs:
             operation_logger.py \
             tests/test_operation_logger.py \
             tests/test_cli.py \
-            scripts/build_release.py
+            scripts/build_release.py \
+            scripts/build_release_notes.py
 
       - name: Run tests
         run: python -m pytest
@@ -40,14 +43,20 @@ jobs:
       - name: Build release zip
         run: python scripts/build_release.py
 
+      - name: Build release notes
+        run: python scripts/build_release_notes.py "${GITHUB_REF_NAME}" > dist/release-notes.md
+
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
           name: sudo-skill-release
-          path: dist/sudo-skill.zip
+          path: |
+            dist/sudo-skill.zip
+            dist/release-notes.md
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
         with:
+          name: sudo-skill ${{ github.ref_name }}
+          body_path: dist/release-notes.md
           files: dist/sudo-skill.zip
-          generate_release_notes: true

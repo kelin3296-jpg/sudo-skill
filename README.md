@@ -5,36 +5,37 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-A Claude Code skill for explicit privileged workflows with backup, audit logs, diff, and rollback helpers.
+Safer `/sudo` workflows for Claude Code — backup before change, diff before rollback, and object-aware rollback guards for sensitive file edits.
 
 中文说明见 [`README.zh-CN.md`](README.zh-CN.md).
 
-## What this is
+## Why this exists
 
-`sudo-skill` keeps the familiar `/sudo` mental model, but it does **not** claim to automatically bypass Claude Code sandboxing or mutate bash tool parameters. Instead, it helps the host agent work explicitly and safely around sensitive changes by recording:
+Claude Code users often need a lightweight `/sudo` mental model for high-risk edits, but "auto-elevated mode" is both misleading and unsafe. `sudo-skill` keeps the command shape familiar while making the contract explicit:
 
-- pre-change backups
-- operation history
-- unified diff for text files
-- guarded rollback with object validation
-- explicit enter / exit workflow state
+- enter an explicit privileged workflow
+- back up files before changing them
+- inspect text diffs before rollback
+- refuse destructive rollback when the tracked file object has changed
+- keep an audit trail that stays understandable after rollback
 
-## Platform boundary
+## At a glance
 
-This project is **Claude Code only** in v1.
-It does not attempt to support OpenClaw, Codex, or any other runtime yet.
+- **Runtime**: Claude Code only
+- **Scope**: explicit privileged workflow, not automatic sandbox bypass
+- **Core features**: backup, audit log, unified diff, guarded rollback, release zip packaging
+- **Storage**: `~/.claude` by default, or `SUDO_SKILL_HOME` for isolated environments
 
-## Public commands
+## Quick start
 
 ```bash
 python sudo.py enter
-python sudo.py exit
-python sudo.py status
-python sudo.py clean --days 7
-python sudo.py purge --yes
-python sudo.py history 20
+python sudo.py log-modify ~/.ssh/config
+# edit the file
+python sudo.py finalize-modify ~/.ssh/config
+python sudo.py diff ~/.ssh/config
 python sudo.py rollback 1 --yes
-python sudo.py diff [path|history-index]
+python sudo.py exit
 ```
 
 ## Install
@@ -53,6 +54,19 @@ mkdir -p ~/.claude/skills
 unzip dist/sudo-skill.zip -d /tmp/sudo-skill-release
 rm -rf ~/.claude/skills/sudo
 mv /tmp/sudo-skill-release/sudo-skill ~/.claude/skills/sudo
+```
+
+## Public commands
+
+```bash
+python sudo.py enter
+python sudo.py exit
+python sudo.py status
+python sudo.py clean --days 7
+python sudo.py purge --yes
+python sudo.py history 20
+python sudo.py rollback 1 --yes
+python sudo.py diff [path|history-index]
 ```
 
 ## Integrator commands used by the skill
@@ -120,6 +134,6 @@ python3 scripts/build_release.py
 
 The release builder creates `dist/sudo-skill.zip` without `__MACOSX`, tests, or cache files.
 
-Tags like `v0.1.0` trigger `.github/workflows/release.yml` to run tests, build the zip, and publish a GitHub Release.
+Tags like `v0.1.0` trigger `.github/workflows/release.yml` to run tests, build the zip, and publish a GitHub Release with structured notes.
 
-If you publish this repository under a different GitHub owner or repo name, update the CI badge URL at the top of this file.
+If you publish this repository under a different GitHub owner or repo name, update the badge URLs at the top of this file.

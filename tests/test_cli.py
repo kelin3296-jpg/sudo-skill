@@ -86,3 +86,17 @@ def test_release_zip_is_clean(cli_env):
     assert all("__MACOSX" not in name for name in names)
     assert "sudo-skill/SKILL.md" in names
     assert "sudo-skill/tests/test_cli.py" not in names
+
+
+def test_release_notes_can_be_generated_before_tag_exists(cli_env):
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "build_release_notes.py"), "v9999.99.99-preview"],
+        cwd=ROOT,
+        env=cli_env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode == 0, result.stderr
+    assert "# sudo-skill v9999.99.99-preview" in result.stdout
+    assert "## Highlights" in result.stdout

@@ -5,34 +5,37 @@
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-一个面向 Claude Code 的 `/sudo` skill，用来做**显式特权流程**、备份、审计日志、diff 和安全回滚。
+给 Claude Code 用的更稳妥 `/sudo` 工作流：先备份、再修改；先看 diff、再回滚；对象不一致时拒绝 destructive rollback。
 
-## 它解决什么问题
+英文说明见 [`README.md`](README.md).
 
-这个项目保留 `/sudo` 的用户心智，但**不会伪装成“已经自动绕过沙箱”**。它真正做的是：
+## 这个项目为什么存在
 
-- 进入 / 退出显式特权工作流
-- 在修改前记录备份
-- 保留操作历史
-- 为文本文件提供 unified diff
-- 在回滚前校验当前对象，尽量避免误删、误覆盖
+很多 Claude Code 使用场景确实需要 `/sudo` 这种心智模型，但“自动提权模式”既容易误导，也不安全。`sudo-skill` 的目标是保留熟悉的命令入口，同时把能力边界讲清楚：
 
-## 平台边界
+- 进入显式特权工作流，而不是伪装成自动绕过沙箱
+- 在改文件前留备份
+- 在回滚前先看文本 diff
+- 如果当前对象已经变了，就拒绝 destructive rollback
+- 保留回滚后依然读得懂的审计记录
 
-v1 只支持 **Claude Code**。
-当前不扩展到 OpenClaw、Codex 或其他运行时。
+## 一眼看懂
 
-## 面向用户的公开命令
+- **运行环境**：仅支持 Claude Code
+- **能力边界**：显式特权工作流，不自动修改宿主沙箱
+- **核心能力**：备份、审计日志、unified diff、安全回滚、可发布 zip
+- **默认存储**：写入 `~/.claude`，也支持 `SUDO_SKILL_HOME` 做隔离环境
+
+## 快速开始
 
 ```bash
 python sudo.py enter
-python sudo.py exit
-python sudo.py status
-python sudo.py clean --days 7
-python sudo.py purge --yes
-python sudo.py history 20
+python sudo.py log-modify ~/.ssh/config
+# 编辑文件
+python sudo.py finalize-modify ~/.ssh/config
+python sudo.py diff ~/.ssh/config
 python sudo.py rollback 1 --yes
-python sudo.py diff [路径|历史序号]
+python sudo.py exit
 ```
 
 ## 安装示例
@@ -51,6 +54,19 @@ mkdir -p ~/.claude/skills
 unzip dist/sudo-skill.zip -d /tmp/sudo-skill-release
 rm -rf ~/.claude/skills/sudo
 mv /tmp/sudo-skill-release/sudo-skill ~/.claude/skills/sudo
+```
+
+## 面向用户的公开命令
+
+```bash
+python sudo.py enter
+python sudo.py exit
+python sudo.py status
+python sudo.py clean --days 7
+python sudo.py purge --yes
+python sudo.py history 20
+python sudo.py rollback 1 --yes
+python sudo.py diff [路径|历史序号]
 ```
 
 ## 供 skill / 集成层使用的记录命令
@@ -118,6 +134,6 @@ python3 scripts/build_release.py
 
 发布脚本会生成 `dist/sudo-skill.zip`，并自动排除 `__MACOSX`、测试文件和缓存目录。
 
-推送 `v0.1.0` 这类 tag 时，`.github/workflows/release.yml` 会自动跑测试、构建 zip，并发布 GitHub Release。
+推送 `v0.1.0` 这类 tag 时，`.github/workflows/release.yml` 会自动跑测试、构建 zip，并发布结构化的 GitHub Release 说明。
 
-如果你最终把仓库发布到别的 GitHub 用户名或仓库名下，记得同步更新本文件顶部的 CI badge 链接。
+如果你最终把仓库发布到别的 GitHub 用户名或仓库名下，记得同步更新本文件顶部的 badge 链接。
