@@ -64,6 +64,27 @@ https://github.com/kelin3296-jpg/sudo-skill
 6. 如果 Release 资产不可用，就退回到仓库内容安装，并明确告诉我你实际用了哪种安装路径
 ```
 
+### 适合直接转发给朋友的话术
+
+```text
+我最近在用一个 Claude Code 的 `/sudo` 安装包，适合那种要改敏感文件、系统路径，但又担心改坏之后不好撤回的场景。
+
+你直接把下面这段发给 Claude Code 就行：
+
+请帮我安装这个 GitHub 项目里的 `sudo-skill`：
+https://github.com/kelin3296-jpg/sudo-skill
+
+要求：
+1. 优先下载最新 Release 里的 `sudo-skill.zip`
+2. 安装到 `~/.claude/skills/sudo`
+3. 如果已有旧目录，先备份再覆盖
+4. 安装后运行 `python3 ~/.claude/skills/sudo/sudo.py status` 检查是否正常
+5. 再告诉我 `/sudo`、`/sudo diff`、`/sudo history 5`、`/sudo rollback 1 --yes` 怎么用
+6. 如果 Release 资产不可用，就直接从仓库内容安装，并说明你用了哪种方式
+
+这个 skill 的作用是：先备份、再修改；先看 diff、再回滚。这样就算进了特权模式，后面也还有日志、备份和回滚这条兜底路径。
+```
+
 ### 手动安装兜底命令
 
 ```bash
