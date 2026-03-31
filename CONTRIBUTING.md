@@ -1,16 +1,16 @@
-# Contributing to sudo-skill
+# 参与贡献 sudo-skill
 
-Thanks for taking the time to contribute. This repository is intentionally small: it ships a Claude Code skill, a thin CLI wrapper, and the safety logic behind backup, diff, audit logs, and guarded rollback.
+感谢你愿意参与这个项目。这个仓库刻意保持精简：它主要包含一个 Claude Code skill、一个薄 CLI 封装，以及围绕备份、diff、审计日志和安全回滚的核心逻辑。
 
-## Good first contributions
+## 适合的贡献方向
 
-- tighten rollback safety checks
-- improve docs or examples
-- add tests for edge cases
-- improve release or repository automation
-- refine contributor experience for issues and pull requests
+- 强化 rollback 的安全校验
+- 补文档和示例
+- 为边界场景补测试
+- 改进 release 或仓库自动化
+- 优化 issue / PR 的协作体验
 
-## Local development
+## 本地开发
 
 ```bash
 python3 -m venv .venv
@@ -19,46 +19,38 @@ python3 -m venv .venv
 python3 scripts/build_release.py
 ```
 
-Optional release note preview:
+如果你想预览 release notes：
 
 ```bash
-python3 scripts/build_release_notes.py v0.1.1-preview
+python3 scripts/build_release_notes.py v0.1.4-preview
 ```
 
-## Project boundaries
+## 项目边界
 
-Please keep these constraints intact unless the maintainers explicitly decide otherwise:
+除非维护者明确决定调整，否则请尽量保持这些约束：
 
-- runtime target is **Claude Code** only
-- `/sudo` is an **explicit workflow**, not an implicit sandbox bypass
-- rollback should prefer refusing unsafe destructive actions over forcing success
-- `operation_logger.py` is internal; user-facing commands go through `sudo.py`
-- release zip should stay clean and installable as a skill package
+- 运行时目标仅限 **Claude Code**
+- `/sudo` 是**显式工作流**，不是隐式绕过沙箱
+- rollback 宁可拒绝不安全的 destructive 操作，也不要强行成功
+- `operation_logger.py` 保持内部实现，对外命令统一走 `sudo.py`
+- release zip 应继续保持干净、可安装
 
-## Before opening a pull request
+## 提交 PR 前建议
 
-- keep changes focused and explain the user-facing impact
-- add or update tests when behavior changes
-- update docs when commands, workflow, or safety guarantees change
-- run `./.venv/bin/python -m pytest`
-- run `python3 scripts/build_release.py` if packaging logic changed
+- 改动尽量聚焦，并说明对用户的实际影响
+- 行为有变化时补测试或更新测试
+- 命令、流程或安全承诺变动时同步改文档
+- 运行 `./.venv/bin/python -m pytest`
+- 如果改了打包逻辑，补跑 `python3 scripts/build_release.py`
 
-## Pull request checklist
+## PR 描述建议包含
 
-Include these points in your PR description when relevant:
+- 这次改动解决了什么问题
+- 哪些安全行为或交互发生了变化
+- 你跑了哪些测试
+- 是否更新了文档或 release notes
+- 是否还有后续工作适合拆到下一次 PR
 
-- what problem this change solves
-- what safety or behavior changed
-- what tests you ran
-- whether docs or release notes changed
-- any follow-up work that should happen separately
+## 协作风格
 
-## Release expectations
-
-Tags like `v0.1.1` trigger the release workflow. The workflow runs tests, builds `dist/sudo-skill.zip`, generates structured release notes, and publishes a GitHub Release.
-
-If your change affects packaging, docs, or release automation, please mention that clearly in the PR.
-
-## Code of collaboration
-
-Be kind, precise, and practical. Small, reviewable pull requests are preferred over large mixed changes.
+保持友好、具体、务实。相比“大而全”的混合改动，这个项目更欢迎小而清晰、便于 review 的 PR。

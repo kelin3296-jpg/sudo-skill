@@ -14,35 +14,35 @@
   <rect x="56" y="86" width="1168" height="498" rx="28" fill="url(#card)" stroke="#343A69" stroke-width="1.5"/>
 
   <text x="96" y="146" fill="#FFFFFF" font-size="56" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">sudo-skill</text>
-  <text x="96" y="196" fill="#B9C2FF" font-size="28" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">A safer /sudo workflow for Claude Code</text>
+  <text x="96" y="196" fill="#B9C2FF" font-size="28" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">给 Claude Code 用的更稳妥 /sudo 工作流</text>
 
-  <text x="96" y="270" fill="#F7F9FF" font-size="40" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">The scary part is not the command.</text>
-  <text x="96" y="320" fill="#F7F9FF" font-size="40" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">It is not knowing how to undo a bad change.</text>
+  <text x="96" y="270" fill="#F7F9FF" font-size="40" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">真正可怕的不是命令本身。</text>
+  <text x="96" y="320" fill="#F7F9FF" font-size="40" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">而是不知道改坏之后怎么撤回来。</text>
 
-  <text x="96" y="390" fill="#A7B2EE" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Backup before change. Diff before rollback.</text>
-  <text x="96" y="424" fill="#A7B2EE" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Logs and snapshots as the fallback path.</text>
+  <text x="96" y="390" fill="#A7B2EE" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">先备份，再修改；先看 diff，再决定回滚。</text>
+  <text x="96" y="424" fill="#A7B2EE" font-size="24" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">日志和快照，就是高风险修改的兜底路径。</text>
 
   <rect x="96" y="462" width="276" height="62" rx="18" fill="#212754"/>
-  <text x="122" y="501" fill="#E5EBFF" font-size="21" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">backup before change</text>
+  <text x="122" y="501" fill="#E5EBFF" font-size="21" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">修改前先备份</text>
 
   <rect x="392" y="462" width="246" height="62" rx="18" fill="#212754"/>
-  <text x="430" y="501" fill="#E5EBFF" font-size="21" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">diff before rollback</text>
+  <text x="430" y="501" fill="#E5EBFF" font-size="21" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">回滚前先看 diff</text>
 
   <rect x="658" y="462" width="300" height="62" rx="18" fill="#212754"/>
-  <text x="686" y="501" fill="#E5EBFF" font-size="21" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">guarded rollback path</text>
+  <text x="686" y="501" fill="#E5EBFF" font-size="21" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">对象校验后回滚</text>
 
   <rect x="940" y="182" width="228" height="266" rx="22" fill="#12162B" stroke="#2A2F56"/>
   <circle cx="972" cy="214" r="7" fill="#FF6B6B"/>
   <circle cx="996" cy="214" r="7" fill="#FFD166"/>
   <circle cx="1020" cy="214" r="7" fill="#4CD964"/>
   <text x="952" y="262" fill="#7CF29A" font-size="22" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">$ /sudo</text>
-  <text x="952" y="300" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">enter tracked</text>
-  <text x="952" y="326" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">privileged workflow</text>
+  <text x="952" y="300" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">进入受跟踪的</text>
+  <text x="952" y="326" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">显式特权工作流</text>
   <text x="952" y="376" fill="#8DA8FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">/sudo diff</text>
-  <text x="952" y="402" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">inspect before undo</text>
+  <text x="952" y="402" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">先检查，再决定撤销</text>
   <text x="952" y="452" fill="#95F5B5" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">/sudo rollback 1</text>
-  <text x="952" y="478" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">recover with logs</text>
-  <text x="952" y="504" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">and backups</text>
+  <text x="952" y="478" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">用日志和备份恢复</text>
+  <text x="952" y="504" fill="#DCE4FF" font-size="19" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">把后顾之忧降下来</text>
 
-  <text x="96" y="566" fill="#96A1D8" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">For users who want privileged edits without the fear of getting stuck afterwards.</text>
+  <text x="96" y="566" fill="#96A1D8" font-size="22" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">适合那些想做高风险修改，但又不想在事后陷入慌乱的用户。</text>
 </svg>

@@ -1,5 +1,5 @@
-name: Feature request
-description: Suggest a new capability, workflow improvement, or contributor-quality enhancement.
+name: 功能建议
+description: 提出新能力、工作流优化或协作体验改进建议。
 title: "[Feature] "
 labels:
   - enhancement
@@ -7,24 +7,24 @@ body:
   - type: textarea
     id: problem
     attributes:
-      label: What problem are you trying to solve?
-      placeholder: It is hard to understand which rollback entries are still active when the history gets long.
+      label: 你想解决什么问题？
+      placeholder: rollback 历史一长之后，不太容易看出哪些记录仍然活跃。
     validations:
       required: true
   - type: textarea
     id: proposal
     attributes:
-      label: What would you like to happen?
-      placeholder: Add a clearer status marker for active vs rolled-back operations.
+      label: 你希望它怎么工作？
+      placeholder: 希望在 history 输出里更清楚地区分 active 和 rolled back 状态。
     validations:
       required: true
   - type: textarea
     id: scope
     attributes:
-      label: Scope and tradeoffs
-      description: Share any constraints, risks, or compatibility concerns you already see.
+      label: 范围与取舍
+      description: 如果你已经看到了兼容性、风险或限制，也可以一起写上。
   - type: textarea
     id: context
     attributes:
-      label: Extra context
-      description: Links, examples, screenshots, or similar tools are all welcome.
+      label: 补充信息
+      description: 链接、示例、截图或类似工具都可以。

@@ -14,7 +14,7 @@ INCLUDE_PATHS = [
     "sudo.py",
     "operation_logger.py",
     "README.md",
-    "README.zh-CN.md",
+    "README.en.md",
     "CHANGELOG.md",
     "SECURITY.md",
     "SUPPORT.md",

@@ -1,5 +1,5 @@
-name: Bug report
-description: Report a broken behavior, regression, or safety issue in sudo-skill.
+name: Bug 反馈
+description: 报告 sudo-skill 的错误、回归或安全相关异常行为。
 title: "[Bug] "
 labels:
   - bug
@@ -7,40 +7,40 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for the report. Please include the smallest reproduction you can.
+        感谢反馈。请尽量提供最小可复现信息。
   - type: textarea
     id: summary
     attributes:
-      label: What happened?
-      description: Describe the bug or regression.
-      placeholder: Rolling back a move refused even though the destination had not changed.
+      label: 发生了什么？
+      description: 请描述 bug 或回归现象。
+      placeholder: 回滚 move 操作时被拒绝了，但目标文件其实没有变化。
     validations:
       required: true
   - type: textarea
     id: steps
     attributes:
-      label: Steps to reproduce
-      description: Share the exact commands, files, or workflow.
+      label: 复现步骤
+      description: 写出你执行的命令、文件和流程。
       placeholder: |
-        1. Run `python sudo.py log-move from.txt to.txt`
-        2. Run `python sudo.py rollback 1 --yes`
-        3. Observe ...
+        1. 运行 `python sudo.py log-move from.txt to.txt`
+        2. 运行 `python sudo.py rollback 1 --yes`
+        3. 观察到 ...
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: What did you expect to happen?
+      label: 你期望发生什么？
     validations:
       required: true
   - type: textarea
     id: environment
     attributes:
-      label: Environment
-      description: Claude Code version, Python version, OS, and skill version/tag if known.
-      placeholder: Claude Code ..., Python 3.11, macOS ..., sudo-skill v0.1.1
+      label: 环境信息
+      description: Claude Code 版本、Python 版本、操作系统、skill 版本或 tag。
+      placeholder: Claude Code ..., Python 3.11, macOS ..., sudo-skill v0.1.4
   - type: textarea
     id: logs
     attributes:
-      label: Logs or screenshots
-      description: Paste relevant output, diff snippets, or screenshots if helpful.
+      label: 日志、输出或截图
+      description: 如果方便，请贴 stdout、stderr、diff 片段或截图。

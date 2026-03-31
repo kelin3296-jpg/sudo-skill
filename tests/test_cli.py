@@ -85,6 +85,7 @@ def test_release_zip_is_clean(cli_env):
         names = archive.namelist()
     assert all("__MACOSX" not in name for name in names)
     assert "sudo-skill/SKILL.md" in names
+    assert "sudo-skill/README.en.md" in names
     assert "sudo-skill/CHANGELOG.md" in names
     assert "sudo-skill/SECURITY.md" in names
     assert "sudo-skill/SUPPORT.md" in names
@@ -102,4 +103,4 @@ def test_release_notes_can_be_generated_before_tag_exists(cli_env):
     )
     assert result.returncode == 0, result.stderr
     assert "# sudo-skill v9999.99.99-preview" in result.stdout
-    assert "## Highlights" in result.stdout
+    assert "## 这个版本适合谁" in result.stdout

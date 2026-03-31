@@ -16,7 +16,7 @@
   <rect width="1200" height="760" rx="32" fill="url(#bg)"/>
 
   <text x="120" y="92" fill="#F8FAFF" font-size="38" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">sudo-skill</text>
-  <text x="120" y="126" fill="#B7C0FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Safer /sudo workflows for Claude Code with backup, diff, audit logs, and guarded rollback.</text>
+  <text x="120" y="126" fill="#B7C0FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">给 Claude Code 用的更稳妥 /sudo 工作流</text>
 
   <g filter="url(#shadow)">
     <rect x="120" y="160" width="960" height="540" rx="22" fill="url(#card)" stroke="#353A69" stroke-width="1.5"/>
@@ -25,7 +25,7 @@
   <circle cx="158" cy="194" r="7" fill="#FF6B6B"/>
   <circle cx="182" cy="194" r="7" fill="#FFD166"/>
   <circle cx="206" cy="194" r="7" fill="#4CD964"/>
-  <text x="234" y="201" fill="#9EA7DA" font-size="18" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">terminal demo</text>
+  <text x="234" y="201" fill="#9EA7DA" font-size="18" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">终端演示</text>
 
   <rect x="150" y="232" width="610" height="430" rx="16" fill="#0C0D17" stroke="#262A4A"/>
   <text x="182" y="278" fill="#7CF29A" font-size="22" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">$ python sudo.py enter</text>
@@ -44,19 +44,19 @@
   <text x="182" y="668" fill="#D9E1FF" font-size="20" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace">Rolled back modify: /Users/you/.ssh/config</text>
 
   <rect x="790" y="232" width="250" height="430" rx="18" fill="#11142A" stroke="#262A4A"/>
-  <text x="822" y="278" fill="#F8FAFF" font-size="26" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">What it gives you</text>
+  <text x="822" y="278" fill="#F8FAFF" font-size="26" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-weight="700">它能给你什么</text>
 
   <rect x="822" y="308" width="186" height="58" rx="14" fill="#1A2045"/>
-  <text x="846" y="344" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Backup before change</text>
+  <text x="848" y="344" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">修改前先备份</text>
 
   <rect x="822" y="384" width="186" height="58" rx="14" fill="#1A2045"/>
-  <text x="858" y="420" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Unified diff view</text>
+  <text x="852" y="420" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">回滚前先看 diff</text>
 
   <rect x="822" y="460" width="186" height="58" rx="14" fill="#1A2045"/>
-  <text x="841" y="496" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Guarded rollback</text>
+  <text x="842" y="496" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">对象校验后回滚</text>
 
   <rect x="822" y="536" width="186" height="58" rx="14" fill="#1A2045"/>
-  <text x="847" y="572" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Audit trail stays readable</text>
+  <text x="843" y="572" fill="#DCE5FF" font-size="20" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">日志和备份可追溯</text>
 
-  <text x="120" y="724" fill="#98A2D6" font-size="18" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">Open-source repo polish: demo image, contributor guide, issue templates, and release automation.</text>
+  <text x="120" y="724" fill="#98A2D6" font-size="18" font-family="ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">先给高风险修改一条后路，再去做真正的敏感变更。</text>
 </svg>
