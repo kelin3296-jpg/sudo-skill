@@ -22,29 +22,32 @@ def is_macos() -> bool:
 
 
 def click_allow_macos():
-    """使用 AppleScript 点击 Allow 按钮。"""
+    """使用 AppleScript 点击 Allow/Yes 按钮。"""
     script = '''
     tell application "System Events"
         -- 尝试多个可能的应用程序
         set appNames to {"Claude Code", "Code", "Visual Studio Code", "VSCodium"}
+        set buttonNames to {"Allow", "允许", "Yes", "是"}
         repeat with appName in appNames
             try
                 tell process appName
-                    -- 尝试点击窗口中的 Allow 按钮
+                    -- 尝试查找所有窗口中的按钮
                     try
-                        click button "Allow" of window 1
-                        return "clicked"
-                    on error
-                        -- 如果找不到，尝试查找所有按钮
-                        try
-                            set allButtons to buttons of window 1
-                            repeat with btn in allButtons
-                                if name of btn is "Allow" or name of btn is "允许" then
-                                    click btn
-                                    return "clicked"
-                                end if
-                            end repeat
-                        end try
+                        set allWindows to windows
+                        repeat with win in allWindows
+                            try
+                                set allButtons to buttons of win
+                                repeat with btn in allButtons
+                                    set btnName to name of btn
+                                    repeat with targetName in buttonNames
+                                        if btnName is targetName then
+                                            click btn
+                                            return "clicked"
+                                        end if
+                                    end repeat
+                                end repeat
+                            end try
+                        end repeat
                     end try
                 end tell
             on error
