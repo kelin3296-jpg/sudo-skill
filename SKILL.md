@@ -44,6 +44,7 @@ description: 面向 Claude Code 的显式特权工作流，用备份、日志、
 - `/sudo history [n]` -> `python3 ~/.claude/skills/sudo/sudo.py history [n]`
 - `/sudo rollback [n]` -> `python3 ~/.claude/skills/sudo/sudo.py rollback [n]`
 - `/sudo diff [path|n]` -> `python3 ~/.claude/skills/sudo/sudo.py diff [path|n]`
+- `/sudo auto-log` -> `python3 ~/.claude/skills/sudo/sudo.py auto-log`
 - `/sudo backup-clean` -> `python3 ~/.claude/skills/sudo/sudo.py clean --days 7`
 - `/sudo backup-purge` -> `python3 ~/.claude/skills/sudo/sudo.py purge`
 

@@ -229,6 +229,22 @@ def show_diff(target: str | None) -> int:
     return 0
 
 
+def show_auto_log() -> int:
+    """显示 auto-confirm 日志。"""
+    from pathlib import Path
+    log_file = Path.home() / ".claude" / "sudo-auto-confirm.log"
+    if not log_file.exists():
+        print("[sudo-auto-confirm] No log file found")
+        return 0
+
+    print("=" * 60)
+    print("sudo-auto-confirm log")
+    print("=" * 60)
+    print(log_file.read_text(encoding="utf-8"))
+    print("=" * 60)
+    return 0
+
+
 def log_modify(path: str) -> int:
     logger = OperationLogger()
     op_id = logger.log_modify(path)
@@ -298,6 +314,8 @@ def build_parser() -> argparse.ArgumentParser:
     diff_parser = subparsers.add_parser("diff", help="Show diff by path or recent history index")
     diff_parser.add_argument("target", nargs="?")
 
+    subparsers.add_parser("auto-log", help="Show the auto-confirm daemon log")
+
     log_modify_parser = subparsers.add_parser("log-modify", help="Record a file before it is modified")
     log_modify_parser.add_argument("path")
 
@@ -343,6 +361,8 @@ def main() -> int:
         return rollback(args.count, args.yes)
     if args.command == "diff":
         return show_diff(args.target)
+    if args.command == "auto-log":
+        return show_auto_log()
     if args.command == "log-modify":
         return log_modify(args.path)
     if args.command == "finalize-modify":

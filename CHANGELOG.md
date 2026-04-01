@@ -1,5 +1,19 @@
 # Changelog
 
+## v0.3.0 (2026-04-01)
+
+### 新功能
+- 添加 `auto-log` 命令，可查看自动确认后台进程的活动日志
+- auto-confirm 后台进程现在支持 VSCode、Visual Studio Code、VSCodium 等多种编辑器
+- auto-confirm 支持中文"允许"按钮识别
+- auto-confirm 日志带时间戳和点击次数计数
+
+### 改进
+- auto-confirm 启动时清空旧日志，避免日志累积
+- auto-confirm 启动和停止时显示日志文件路径
+- 日志同时输出到文件和 stdout
+- 增加 AppleScript 超时时间从 2 秒到 5 秒
+
 ## v0.2.1 (2026-04-01)
 
 ### 改进

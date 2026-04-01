@@ -14,6 +14,7 @@ from pathlib import Path
 
 
 PID_FILE = Path.home() / ".claude" / "sudo-auto-confirm.pid"
+LOG_FILE = Path.home() / ".claude" / "sudo-auto-confirm.log"
 
 
 def is_macos() -> bool:
@@ -24,15 +25,33 @@ def click_allow_macos():
     """使用 AppleScript 点击 Allow 按钮。"""
     script = '''
     tell application "System Events"
-        tell process "Claude Code"
+        -- 尝试多个可能的应用程序
+        set appNames to {"Claude Code", "Code", "Visual Studio Code", "VSCodium"}
+        repeat with appName in appNames
             try
-                -- 查找 "Allow" 按钮并点击
-                click button "Allow" of window 1
-                return "clicked"
+                tell process appName
+                    -- 尝试点击窗口中的 Allow 按钮
+                    try
+                        click button "Allow" of window 1
+                        return "clicked"
+                    on error
+                        -- 如果找不到，尝试查找所有按钮
+                        try
+                            set allButtons to buttons of window 1
+                            repeat with btn in allButtons
+                                if name of btn is "Allow" or name of btn is "允许" then
+                                    click btn
+                                    return "clicked"
+                                end if
+                            end repeat
+                        end try
+                    end try
+                end tell
             on error
-                return "not found"
+                -- 这个应用没有运行，继续下一个
             end try
-        end tell
+        end repeat
+        return "not found"
     end tell
     '''
     try:
@@ -40,7 +59,7 @@ def click_allow_macos():
             ["osascript", "-e", script],
             capture_output=True,
             text=True,
-            timeout=2
+            timeout=5
         )
         return result.stdout.strip() == "clicked"
     except Exception:
@@ -56,21 +75,40 @@ def find_and_click_allow():
         return False
 
 
+def log_message(message: str):
+    """写日志到文件和 stdout。"""
+    from datetime import datetime
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    log_line = f"[{timestamp}] {message}\n"
+    print(log_line, end="")
+    try:
+        with LOG_FILE.open("a", encoding="utf-8") as f:
+            f.write(log_line)
+    except Exception:
+        pass
+
+
 def run_auto_confirm():
     """主循环：持续监听并点击 Allow。"""
     # 写入 PID 文件
     PID_FILE.write_text(str(os.getpid()))
 
-    print(f"[sudo-auto-confirm] Started (PID: {os.getpid()})")
-    print("[sudo-auto-confirm] Listening for 'Allow' buttons...")
+    # 清空旧日志
+    if LOG_FILE.exists():
+        LOG_FILE.unlink()
 
+    log_message(f"Started (PID: {os.getpid()})")
+    log_message("Listening for 'Allow' buttons...")
+
+    click_count = 0
     try:
         while True:
             if find_and_click_allow():
-                print("[sudo-auto-confirm] Clicked 'Allow'")
+                click_count += 1
+                log_message(f"Clicked 'Allow' (total: {click_count})")
             time.sleep(0.5)  # 每 500ms 检查一次
     except KeyboardInterrupt:
-        print("\n[sudo-auto-confirm] Stopped")
+        log_message("Stopped")
     finally:
         if PID_FILE.exists():
             PID_FILE.unlink()
@@ -84,19 +122,25 @@ def start():
             # 检查进程是否还在运行
             os.kill(old_pid, 0)
             print(f"[sudo-auto-confirm] Already running (PID: {old_pid})")
+            print(f"[sudo-auto-confirm] Log file: {LOG_FILE}")
             return
         except (OSError, ValueError):
             # 进程不存在了
             pass
 
+    # 清空旧日志
+    if LOG_FILE.exists():
+        LOG_FILE.unlink()
+
     # 启动新进程
     subprocess.Popen(
         [sys.executable, __file__, "--daemon"],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
+        stdout=open(LOG_FILE, "w", encoding="utf-8"),
+        stderr=open(LOG_FILE, "a", encoding="utf-8"),
         start_new_session=True
     )
-    print("[sudo-auto-confirm] Started in background")
+    print(f"[sudo-auto-confirm] Started in background")
+    print(f"[sudo-auto-confirm] Log file: {LOG_FILE}")
 
 
 def stop():
@@ -116,20 +160,36 @@ def stop():
             PID_FILE.unlink()
 
 
+def show_log():
+    """显示日志。"""
+    if not LOG_FILE.exists():
+        print("[sudo-auto-confirm] No log file found")
+        return
+
+    print("=" * 60)
+    print("sudo-auto-confirm log")
+    print("=" * 60)
+    print(LOG_FILE.read_text(encoding="utf-8"))
+    print("=" * 60)
+
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         if sys.argv[1] == "start":
             start()
         elif sys.argv[1] == "stop":
             stop()
+        elif sys.argv[1] == "log":
+            show_log()
         elif sys.argv[1] == "--daemon":
             run_auto_confirm()
         else:
             print(f"Unknown command: {sys.argv[1]}")
-            print("Usage: auto_confirm.py [start|stop]")
+            print("Usage: auto_confirm.py [start|stop|log]")
     else:
-        print("Usage: auto_confirm.py [start|stop]")
+        print("Usage: auto_confirm.py [start|stop|log]")
         print("")
         print("Commands:")
         print("  start  - Start background auto-confirm daemon")
         print("  stop   - Stop the daemon")
+        print("  log    - Show the auto-confirm log")
